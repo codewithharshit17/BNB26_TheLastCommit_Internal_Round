@@ -1,0 +1,1046 @@
+[
+  {
+    "item_id": "i_0001",
+    "kind": "diagnostic",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "name = \"hello\"\nname.upper()\nprint(name)",
+    "problem_ref": null,
+    "signature": {
+      "real": "hello",
+      "noop_method": "HELLO",
+      "range_1_to_n": "hello",
+      "index_1_based": "hello",
+      "index_from_m1": "hello",
+      "assign_copies": "hello",
+      "add_before_div": "hello"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0002",
+    "kind": "diagnostic",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "name = \"world\"\nname.upper()\nprint(name)",
+    "problem_ref": null,
+    "signature": {
+      "real": "world",
+      "noop_method": "WORLD",
+      "range_1_to_n": "world",
+      "index_1_based": "world",
+      "index_from_m1": "world",
+      "assign_copies": "world",
+      "add_before_div": "world"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0003",
+    "kind": "diagnostic",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "name = \"python\"\nname.upper()\nprint(name)",
+    "problem_ref": null,
+    "signature": {
+      "real": "python",
+      "noop_method": "PYTHON",
+      "range_1_to_n": "python",
+      "index_1_based": "python",
+      "index_from_m1": "python",
+      "assign_copies": "python",
+      "add_before_div": "python"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0004",
+    "kind": "discriminator",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "greeting = \"hi\"\ngreeting.upper()\nprint(greeting)",
+    "problem_ref": null,
+    "signature": {
+      "real": "hi",
+      "noop_method": "HI",
+      "range_1_to_n": "hi",
+      "index_1_based": "hi",
+      "index_from_m1": "hi",
+      "assign_copies": "hi",
+      "add_before_div": "hi"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0005",
+    "kind": "discriminator",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "greeting = \"bye\"\ngreeting.upper()\nprint(greeting)",
+    "problem_ref": null,
+    "signature": {
+      "real": "bye",
+      "noop_method": "BYE",
+      "range_1_to_n": "bye",
+      "index_1_based": "bye",
+      "index_from_m1": "bye",
+      "assign_copies": "bye",
+      "add_before_div": "bye"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0006",
+    "kind": "transfer",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "city = \"mumbai\"\ncity.upper()\nprint(city)",
+    "problem_ref": null,
+    "signature": {
+      "real": "mumbai",
+      "noop_method": "MUMBAI",
+      "range_1_to_n": "mumbai",
+      "index_1_based": "mumbai",
+      "index_from_m1": "mumbai",
+      "assign_copies": "mumbai",
+      "add_before_div": "mumbai"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0007",
+    "kind": "transfer",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "city = \"delhi\"\ncity.upper()\nprint(city)",
+    "problem_ref": null,
+    "signature": {
+      "real": "delhi",
+      "noop_method": "DELHI",
+      "range_1_to_n": "delhi",
+      "index_1_based": "delhi",
+      "index_from_m1": "delhi",
+      "assign_copies": "delhi",
+      "add_before_div": "delhi"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0008",
+    "kind": "discriminator",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "msg = \"HELLO\"\nmsg.lower()\nprint(msg)",
+    "problem_ref": null,
+    "signature": {
+      "real": "HELLO",
+      "noop_method": "hello",
+      "range_1_to_n": "HELLO",
+      "index_1_based": "HELLO",
+      "index_from_m1": "HELLO",
+      "assign_copies": "HELLO",
+      "add_before_div": "HELLO"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0009",
+    "kind": "discriminator",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "msg = \"PYTHON\"\nmsg.lower()\nprint(msg)",
+    "problem_ref": null,
+    "signature": {
+      "real": "PYTHON",
+      "noop_method": "python",
+      "range_1_to_n": "PYTHON",
+      "index_1_based": "PYTHON",
+      "index_from_m1": "PYTHON",
+      "assign_copies": "PYTHON",
+      "add_before_div": "PYTHON"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0010",
+    "kind": "transfer",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "text = \"a b c\"\ntext.split()\nprint(text)",
+    "problem_ref": null,
+    "signature": {
+      "real": "a b c",
+      "noop_method": "['a', 'b', 'c']",
+      "range_1_to_n": "a b c",
+      "index_1_based": "a b c",
+      "index_from_m1": "a b c",
+      "assign_copies": "a b c",
+      "add_before_div": "a b c"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0011",
+    "kind": "transfer",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "text = \"one two three\"\ntext.split()\nprint(text)",
+    "problem_ref": null,
+    "signature": {
+      "real": "one two three",
+      "noop_method": "['one', 'two', 'three']",
+      "range_1_to_n": "one two three",
+      "index_1_based": "one two three",
+      "index_from_m1": "one two three",
+      "assign_copies": "one two three",
+      "add_before_div": "one two three"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0012",
+    "kind": "discriminator",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "s = \"hello\"\ns.replace(\"hello\", \"world\")\nprint(s)",
+    "problem_ref": null,
+    "signature": {
+      "real": "hello",
+      "noop_method": "world",
+      "range_1_to_n": "hello",
+      "index_1_based": "hello",
+      "index_from_m1": "hello",
+      "assign_copies": "hello",
+      "add_before_div": "hello"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0013",
+    "kind": "discriminator",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "s = \"cat\"\ns.replace(\"cat\", \"dog\")\nprint(s)",
+    "problem_ref": null,
+    "signature": {
+      "real": "cat",
+      "noop_method": "dog",
+      "range_1_to_n": "cat",
+      "index_1_based": "cat",
+      "index_from_m1": "cat",
+      "assign_copies": "cat",
+      "add_before_div": "cat"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0014",
+    "kind": "probe",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "words = \"x y\"\nwords.split()\nprint(words)",
+    "problem_ref": null,
+    "signature": {
+      "real": "x y",
+      "noop_method": "['x', 'y']",
+      "range_1_to_n": "x y",
+      "index_1_based": "x y",
+      "index_from_m1": "x y",
+      "assign_copies": "x y",
+      "add_before_div": "x y"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0015",
+    "kind": "retest",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "label = \"relearn\"\nlabel.upper()\nprint(label)",
+    "problem_ref": null,
+    "signature": {
+      "real": "relearn",
+      "noop_method": "RELEARN",
+      "range_1_to_n": "relearn",
+      "index_1_based": "relearn",
+      "index_from_m1": "relearn",
+      "assign_copies": "relearn",
+      "add_before_div": "relearn"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0016",
+    "kind": "retest",
+    "family": "noop_method",
+    "prompt": "What does this program print?",
+    "code": "label = \"kiro\"\nlabel.upper()\nprint(label)",
+    "problem_ref": null,
+    "signature": {
+      "real": "kiro",
+      "noop_method": "KIRO",
+      "range_1_to_n": "kiro",
+      "index_1_based": "kiro",
+      "index_from_m1": "kiro",
+      "assign_copies": "kiro",
+      "add_before_div": "kiro"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0017",
+    "kind": "diagnostic",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "for i in range(3):\n    print(i)",
+    "problem_ref": null,
+    "signature": {
+      "real": "0\n1\n2",
+      "noop_method": "0\n1\n2",
+      "range_1_to_n": "1\n2\n3",
+      "index_1_based": "0\n1\n2",
+      "index_from_m1": "0\n1\n2",
+      "assign_copies": "0\n1\n2",
+      "add_before_div": "0\n1\n2"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0018",
+    "kind": "diagnostic",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "for i in range(5):\n    print(i)",
+    "problem_ref": null,
+    "signature": {
+      "real": "0\n1\n2\n3\n4",
+      "noop_method": "0\n1\n2\n3\n4",
+      "range_1_to_n": "1\n2\n3\n4\n5",
+      "index_1_based": "0\n1\n2\n3\n4",
+      "index_from_m1": "0\n1\n2\n3\n4",
+      "assign_copies": "0\n1\n2\n3\n4",
+      "add_before_div": "0\n1\n2\n3\n4"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0019",
+    "kind": "discriminator",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "total = 0\nfor i in range(4):\n    total += i\nprint(total)",
+    "problem_ref": null,
+    "signature": {
+      "real": "6",
+      "noop_method": "6",
+      "range_1_to_n": "10",
+      "index_1_based": "6",
+      "index_from_m1": "6",
+      "assign_copies": "6",
+      "add_before_div": "6"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0020",
+    "kind": "discriminator",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "total = 0\nfor i in range(3):\n    total += i\nprint(total)",
+    "problem_ref": null,
+    "signature": {
+      "real": "3",
+      "noop_method": "3",
+      "range_1_to_n": "6",
+      "index_1_based": "3",
+      "index_from_m1": "3",
+      "assign_copies": "3",
+      "add_before_div": "3"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0021",
+    "kind": "discriminator",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "total = 0\nfor i in range(5):\n    total += i\nprint(total)",
+    "problem_ref": null,
+    "signature": {
+      "real": "10",
+      "noop_method": "10",
+      "range_1_to_n": "15",
+      "index_1_based": "10",
+      "index_from_m1": "10",
+      "assign_copies": "10",
+      "add_before_div": "10"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0022",
+    "kind": "probe",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "nums = list(range(5))\nprint(nums[0])",
+    "problem_ref": null,
+    "signature": {
+      "real": "0",
+      "noop_method": "0",
+      "range_1_to_n": "1",
+      "index_1_based": "4",
+      "index_from_m1": "1",
+      "assign_copies": "0",
+      "add_before_div": "0"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0023",
+    "kind": "probe",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "nums = list(range(3))\nprint(nums[0])",
+    "problem_ref": null,
+    "signature": {
+      "real": "0",
+      "noop_method": "0",
+      "range_1_to_n": "1",
+      "index_1_based": "2",
+      "index_from_m1": "1",
+      "assign_copies": "0",
+      "add_before_div": "0"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0024",
+    "kind": "transfer",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "nums = []\nfor k in range(3):\n    nums.append(k)\nprint(nums)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[0, 1, 2]",
+      "noop_method": "[0, 1, 2]",
+      "range_1_to_n": "[1, 2, 3]",
+      "index_1_based": "[0, 1, 2]",
+      "index_from_m1": "[0, 1, 2]",
+      "assign_copies": "[0, 1, 2]",
+      "add_before_div": "[0, 1, 2]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0025",
+    "kind": "transfer",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "nums = []\nfor k in range(4):\n    nums.append(k)\nprint(nums)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[0, 1, 2, 3]",
+      "noop_method": "[0, 1, 2, 3]",
+      "range_1_to_n": "[1, 2, 3, 4]",
+      "index_1_based": "[0, 1, 2, 3]",
+      "index_from_m1": "[0, 1, 2, 3]",
+      "assign_copies": "[0, 1, 2, 3]",
+      "add_before_div": "[0, 1, 2, 3]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0026",
+    "kind": "transfer",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "evens = [x for x in range(6) if x % 2 == 0]\nprint(evens)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[0, 2, 4]",
+      "noop_method": "[0, 2, 4]",
+      "range_1_to_n": "[2, 4, 6]",
+      "index_1_based": "[0, 2, 4]",
+      "index_from_m1": "[0, 2, 4]",
+      "assign_copies": "[0, 2, 4]",
+      "add_before_div": "[0, 2, 4]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0027",
+    "kind": "discriminator",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "vals = []\nfor i in range(5):\n    vals.append(i)\nprint(vals[0])",
+    "problem_ref": null,
+    "signature": {
+      "real": "0",
+      "noop_method": "0",
+      "range_1_to_n": "1",
+      "index_1_based": "4",
+      "index_from_m1": "1",
+      "assign_copies": "0",
+      "add_before_div": "0"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0028",
+    "kind": "retest",
+    "family": "range_1_to_n",
+    "prompt": "What does this program print?",
+    "code": "for x in range(2):\n    print(x)",
+    "problem_ref": null,
+    "signature": {
+      "real": "0\n1",
+      "noop_method": "0\n1",
+      "range_1_to_n": "1\n2",
+      "index_1_based": "0\n1",
+      "index_from_m1": "0\n1",
+      "assign_copies": "0\n1",
+      "add_before_div": "0\n1"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0029",
+    "kind": "diagnostic",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "a = [10, 20, 30]\nprint(a[1])",
+    "problem_ref": null,
+    "signature": {
+      "real": "20",
+      "noop_method": "20",
+      "range_1_to_n": "20",
+      "index_1_based": "10",
+      "index_from_m1": "30",
+      "assign_copies": "20",
+      "add_before_div": "20"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0030",
+    "kind": "diagnostic",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "a = [5, 10, 15]\nprint(a[1])",
+    "problem_ref": null,
+    "signature": {
+      "real": "10",
+      "noop_method": "10",
+      "range_1_to_n": "10",
+      "index_1_based": "5",
+      "index_from_m1": "15",
+      "assign_copies": "10",
+      "add_before_div": "10"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0031",
+    "kind": "diagnostic",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "s = \"hello\"\nprint(s[1])",
+    "problem_ref": null,
+    "signature": {
+      "real": "e",
+      "noop_method": "e",
+      "range_1_to_n": "e",
+      "index_1_based": "h",
+      "index_from_m1": "l",
+      "assign_copies": "e",
+      "add_before_div": "e"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0032",
+    "kind": "diagnostic",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "s = \"python\"\nprint(s[1])",
+    "problem_ref": null,
+    "signature": {
+      "real": "y",
+      "noop_method": "y",
+      "range_1_to_n": "y",
+      "index_1_based": "p",
+      "index_from_m1": "t",
+      "assign_copies": "y",
+      "add_before_div": "y"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0033",
+    "kind": "discriminator",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "a = [100, 200, 300, 400]\nprint(a[3])",
+    "problem_ref": null,
+    "signature": {
+      "real": "400",
+      "noop_method": "400",
+      "range_1_to_n": "400",
+      "index_1_based": "300",
+      "index_from_m1": "IndexError",
+      "assign_copies": "400",
+      "add_before_div": "400"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0034",
+    "kind": "discriminator",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "a = [1, 2, 3, 4]\nprint(a[3])",
+    "problem_ref": null,
+    "signature": {
+      "real": "4",
+      "noop_method": "4",
+      "range_1_to_n": "4",
+      "index_1_based": "3",
+      "index_from_m1": "IndexError",
+      "assign_copies": "4",
+      "add_before_div": "4"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0035",
+    "kind": "discriminator",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "a = [7, 8, 9]\nprint(a[2])",
+    "problem_ref": null,
+    "signature": {
+      "real": "9",
+      "noop_method": "9",
+      "range_1_to_n": "9",
+      "index_1_based": "8",
+      "index_from_m1": "IndexError",
+      "assign_copies": "9",
+      "add_before_div": "9"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0036",
+    "kind": "transfer",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "nums = [10, 20, 30, 40, 50]\nprint(nums[2])",
+    "problem_ref": null,
+    "signature": {
+      "real": "30",
+      "noop_method": "30",
+      "range_1_to_n": "30",
+      "index_1_based": "20",
+      "index_from_m1": "40",
+      "assign_copies": "30",
+      "add_before_div": "30"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0037",
+    "kind": "transfer",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "letters = \"abcde\"\nprint(letters[2])",
+    "problem_ref": null,
+    "signature": {
+      "real": "c",
+      "noop_method": "c",
+      "range_1_to_n": "c",
+      "index_1_based": "b",
+      "index_from_m1": "d",
+      "assign_copies": "c",
+      "add_before_div": "c"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0038",
+    "kind": "probe",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "seq = [99, 88, 77]\nfirst = seq[1]\nprint(first)",
+    "problem_ref": null,
+    "signature": {
+      "real": "88",
+      "noop_method": "88",
+      "range_1_to_n": "88",
+      "index_1_based": "99",
+      "index_from_m1": "77",
+      "assign_copies": "88",
+      "add_before_div": "88"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0039",
+    "kind": "retest",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "data = [2, 4, 6, 8]\nprint(data[1])",
+    "problem_ref": null,
+    "signature": {
+      "real": "4",
+      "noop_method": "4",
+      "range_1_to_n": "4",
+      "index_1_based": "2",
+      "index_from_m1": "6",
+      "assign_copies": "4",
+      "add_before_div": "4"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0040",
+    "kind": "retest",
+    "family": "index_1_based",
+    "prompt": "What does this program print?",
+    "code": "data = [11, 22, 33, 44]\nprint(data[1])",
+    "problem_ref": null,
+    "signature": {
+      "real": "22",
+      "noop_method": "22",
+      "range_1_to_n": "22",
+      "index_1_based": "11",
+      "index_from_m1": "33",
+      "assign_copies": "22",
+      "add_before_div": "22"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0041",
+    "kind": "diagnostic",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "a = [1, 2, 3]\nb = a\na.append(4)\nprint(b)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[1, 2, 3, 4]",
+      "noop_method": "[1, 2, 3, 4]",
+      "range_1_to_n": "[1, 2, 3, 4]",
+      "index_1_based": "[1, 2, 3, 4]",
+      "index_from_m1": "[1, 2, 3, 4]",
+      "assign_copies": "[1, 2, 3]",
+      "add_before_div": "[1, 2, 3, 4]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0042",
+    "kind": "diagnostic",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "a = [10, 20, 30]\nb = a\na.append(40)\nprint(b)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[10, 20, 30, 40]",
+      "noop_method": "[10, 20, 30, 40]",
+      "range_1_to_n": "[10, 20, 30, 40]",
+      "index_1_based": "[10, 20, 30, 40]",
+      "index_from_m1": "[10, 20, 30, 40]",
+      "assign_copies": "[10, 20, 30]",
+      "add_before_div": "[10, 20, 30, 40]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0043",
+    "kind": "discriminator",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "x = [5, 6]\ny = x\nx.insert(0, 0)\nprint(y)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[0, 5, 6]",
+      "noop_method": "[0, 5, 6]",
+      "range_1_to_n": "[0, 5, 6]",
+      "index_1_based": "[0, 5, 6]",
+      "index_from_m1": "[0, 5, 6]",
+      "assign_copies": "[5, 6]",
+      "add_before_div": "[0, 5, 6]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0044",
+    "kind": "discriminator",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "x = [9, 10]\ny = x\nx.insert(0, 1)\nprint(y)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[1, 9, 10]",
+      "noop_method": "[1, 9, 10]",
+      "range_1_to_n": "[1, 9, 10]",
+      "index_1_based": "[1, 9, 10]",
+      "index_from_m1": "[1, 9, 10]",
+      "assign_copies": "[9, 10]",
+      "add_before_div": "[1, 9, 10]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0045",
+    "kind": "discriminator",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "original = [1, 2, 3]\nbackup = original\noriginal.pop()\nprint(backup)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[1, 2]",
+      "noop_method": "[1, 2]",
+      "range_1_to_n": "[1, 2]",
+      "index_1_based": "[1, 2]",
+      "index_from_m1": "[1, 2]",
+      "assign_copies": "[1, 2, 3]",
+      "add_before_div": "[1, 2]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0046",
+    "kind": "transfer",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "lst = [1, 2, 3]\ncopy_lst = lst\nlst[0] = 99\nprint(copy_lst)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[99, 2, 3]",
+      "noop_method": "[99, 2, 3]",
+      "range_1_to_n": "[99, 2, 3]",
+      "index_1_based": "[1, 2, 99]",
+      "index_from_m1": "[1, 99, 3]",
+      "assign_copies": "[1, 2, 3]",
+      "add_before_div": "[99, 2, 3]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0047",
+    "kind": "transfer",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "nums = [7, 8]\nalias = nums\nalias.append(9)\nprint(nums)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[7, 8, 9]",
+      "noop_method": "[7, 8, 9]",
+      "range_1_to_n": "[7, 8, 9]",
+      "index_1_based": "[7, 8, 9]",
+      "index_from_m1": "[7, 8, 9]",
+      "assign_copies": "[7, 8]",
+      "add_before_div": "[7, 8, 9]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0048",
+    "kind": "probe",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "a = [1, 2, 3]\nb = a\nb.append(4)\nprint(a)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[1, 2, 3, 4]",
+      "noop_method": "[1, 2, 3, 4]",
+      "range_1_to_n": "[1, 2, 3, 4]",
+      "index_1_based": "[1, 2, 3, 4]",
+      "index_from_m1": "[1, 2, 3, 4]",
+      "assign_copies": "[1, 2, 3]",
+      "add_before_div": "[1, 2, 3, 4]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0049",
+    "kind": "retest",
+    "family": "assign_copies",
+    "prompt": "What does this program print?",
+    "code": "p = [10, 20]\nq = p\np += [30]\nprint(q)",
+    "problem_ref": null,
+    "signature": {
+      "real": "[10, 20, 30]",
+      "noop_method": "[10, 20, 30]",
+      "range_1_to_n": "[10, 20, 30]",
+      "index_1_based": "[10, 20, 30]",
+      "index_from_m1": "[10, 20, 30]",
+      "assign_copies": "[10, 20]",
+      "add_before_div": "[10, 20, 30]"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0050",
+    "kind": "diagnostic",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "print(10 + 20 / 2)",
+    "problem_ref": null,
+    "signature": {
+      "real": "20.0",
+      "noop_method": "20.0",
+      "range_1_to_n": "20.0",
+      "index_1_based": "20.0",
+      "index_from_m1": "20.0",
+      "assign_copies": "20.0",
+      "add_before_div": "15.0"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0051",
+    "kind": "diagnostic",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "print(1 + 8 / 4)",
+    "problem_ref": null,
+    "signature": {
+      "real": "3.0",
+      "noop_method": "3.0",
+      "range_1_to_n": "3.0",
+      "index_1_based": "3.0",
+      "index_from_m1": "3.0",
+      "assign_copies": "3.0",
+      "add_before_div": "2.25"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0052",
+    "kind": "discriminator",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "print(10 - 2 * 3)",
+    "problem_ref": null,
+    "signature": {
+      "real": "4",
+      "noop_method": "4",
+      "range_1_to_n": "4",
+      "index_1_based": "4",
+      "index_from_m1": "4",
+      "assign_copies": "4",
+      "add_before_div": "24"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0053",
+    "kind": "discriminator",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "print(20 - 4 * 2)",
+    "problem_ref": null,
+    "signature": {
+      "real": "12",
+      "noop_method": "12",
+      "range_1_to_n": "12",
+      "index_1_based": "12",
+      "index_from_m1": "12",
+      "assign_copies": "12",
+      "add_before_div": "32"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0054",
+    "kind": "discriminator",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "x = 5 + 6 / 2\nprint(x)",
+    "problem_ref": null,
+    "signature": {
+      "real": "8.0",
+      "noop_method": "8.0",
+      "range_1_to_n": "8.0",
+      "index_1_based": "8.0",
+      "index_from_m1": "8.0",
+      "assign_copies": "8.0",
+      "add_before_div": "5.5"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0055",
+    "kind": "discriminator",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "x = 3 + 12 / 4\nprint(x)",
+    "problem_ref": null,
+    "signature": {
+      "real": "6.0",
+      "noop_method": "6.0",
+      "range_1_to_n": "6.0",
+      "index_1_based": "6.0",
+      "index_from_m1": "6.0",
+      "assign_copies": "6.0",
+      "add_before_div": "3.75"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0056",
+    "kind": "transfer",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "a = 10\nb = 20\nc = 5\nprint(a + b / c)",
+    "problem_ref": null,
+    "signature": {
+      "real": "14.0",
+      "noop_method": "14.0",
+      "range_1_to_n": "14.0",
+      "index_1_based": "14.0",
+      "index_from_m1": "14.0",
+      "assign_copies": "14.0",
+      "add_before_div": "6.0"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0057",
+    "kind": "transfer",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "result = 100 + 50 / 5\nprint(result)",
+    "problem_ref": null,
+    "signature": {
+      "real": "110.0",
+      "noop_method": "110.0",
+      "range_1_to_n": "110.0",
+      "index_1_based": "110.0",
+      "index_from_m1": "110.0",
+      "assign_copies": "110.0",
+      "add_before_div": "30.0"
+    },
+    "discriminates": true
+  },
+  {
+    "item_id": "i_0058",
+    "kind": "retest",
+    "family": "add_before_div",
+    "prompt": "What does this program print?",
+    "code": "print(6 + 4 / 2)",
+    "problem_ref": null,
+    "signature": {
+      "real": "8.0",
+      "noop_method": "8.0",
+      "range_1_to_n": "8.0",
+      "index_1_based": "8.0",
+      "index_from_m1": "8.0",
+      "assign_copies": "8.0",
+      "add_before_div": "5.0"
+    },
+    "discriminates": true
+  }
+]
