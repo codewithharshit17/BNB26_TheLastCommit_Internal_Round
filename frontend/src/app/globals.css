@@ -1,4 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-body { background: #0b1020; color: #f8fafc; }
+
+@layer base {
+  html {
+    color-scheme: dark;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: #111319;
+    color: #e2e2ea;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    overscroll-behavior: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code, pre, kbd, samp {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111319;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #282a30;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #373940;
+}
+
+/* Material symbol styling */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.material-symbols-outlined.fill {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Subtle glow utilities */
+.glow-primary {
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.2);
+}
+
+.glow-lime {
+  box-shadow: 0 0 25px rgba(194, 251, 77, 0.25);
+}
+
+.glow-indigo {
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.25);
+}
+
+/* Glassmorphism */
+.glass-panel {
+  background: rgba(29, 31, 38, 0.75);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(160, 142, 122, 0.15);
+}
+
+/* Syntax highlighters */
+.syntax-keyword { color: #818cf8; font-weight: 600; }
+.syntax-fn { color: #38bdf8; }
+.syntax-string { color: #34d399; }
+.syntax-num { color: #fbbf24; }
+.syntax-comment { color: #64748b; font-style: italic; }
+.syntax-punct { color: #94a3b8; }
