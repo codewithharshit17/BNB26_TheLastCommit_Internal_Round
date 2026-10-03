@@ -173,18 +173,6 @@ Outputs are written to:
 The LLM baseline is optional. Without `LLM_API_KEY`, evaluation continues and
 records the baseline as skipped.
 
-## Suggested judge demo sequence
-
-1. Start the live backend and frontend.
-2. Open `/learn` and submit `10` for the initial indexing example.
-3. Show `index_1_based` detection and the intervention response.
-4. Answer the discriminator examples correctly.
-5. Answer a transfer example correctly.
-6. Answer two other-topic items so the delayed retest becomes eligible.
-7. Submit the delayed retest and show `confirmed_resolved` in the learner data.
-8. Optionally submit an unknown/runtime-error answer and show that the held-out
-   `index_from_m1` hypothesis is not exposed as a live diagnosis.
-
 The resolution state machine requires multiple discriminator/surface-form
 passes and a delayed retest; one correct answer cannot confirm resolution.
 
@@ -221,15 +209,6 @@ curl "http://localhost:8000/intervention/index_1_based?item_id=i1&session_id=SES
 - Authentication, production deployment, and persistent frontend session
   management are outside this hackathon skeleton.
 
-## Final prerequisites before presenting
-
-1. Run setup on the machine that will host the demo.
-2. Verify the backend health endpoint.
-3. Run the focused Python tests and frontend type-check.
-4. Run evaluation and confirm `metrics.json` and all six charts exist.
-5. Start live mode with `MOCK=0` and `NEXT_PUBLIC_MOCK=0`.
-6. Use a writable frontend checkout so `next build` and `next lint` can create
-   their generated files.
 
 Do not commit generated databases or environment secrets. Keep `LLM_API_KEY`
 empty unless the optional baseline is intentionally being demonstrated.
