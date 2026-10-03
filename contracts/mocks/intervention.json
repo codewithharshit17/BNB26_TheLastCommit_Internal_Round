@@ -1,0 +1,1 @@
+{"title":"Python indexes start at zero","bank_description":"The first list element is at index 0, not index 1.","contrast_code":"a[0] # first element\na[1] # second element","real_output":"10\n20","believed_output":"20\n30","steps":["Count positions from zero.","Compare the index with the element position."],"takeaway":"Use index 0 for the first element."}

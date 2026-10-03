@@ -1,0 +1,1 @@
+{"type":"object","required":["session_id","item"],"properties":{"session_id":{"type":"string"},"item":{"$ref":"item.schema.json"}}}

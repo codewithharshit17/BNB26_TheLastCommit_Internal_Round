@@ -1,0 +1,1 @@
+export default function Home() { return <main className="p-10"><h1 className="text-4xl">Re:Learn</h1><p className="mt-4">A Python misconception-diagnosis tutor.</p><a className="mt-6 inline-block rounded bg-blue-600 px-4 py-2" href="/learn">Start learning</a></main>; }

@@ -1,0 +1,1 @@
+export function ConfidenceSlider({ value, onChange }: { value: number; onChange: (value: number) => void }) { return <input type="range" min="1" max="5" value={value} onChange={event => onChange(Number(event.target.value))} />; }

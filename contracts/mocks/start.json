@@ -1,0 +1,1 @@
+{"session_id":"mock-session","item":{"item_id":"i1","kind":"diagnostic","family":"indexing","prompt":"What does this print?","code":"a = [10, 20, 30]\nprint(a[1])","problem_ref":null}}

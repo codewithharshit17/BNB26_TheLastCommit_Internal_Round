@@ -1,0 +1,1 @@
+{"type":"object","required":["session_id","item_id","answer","confidence"],"properties":{"session_id":{"type":"string"},"item_id":{"type":"string"},"answer":{"type":"string"},"confidence":{"type":"integer","minimum":1,"maximum":5}}}

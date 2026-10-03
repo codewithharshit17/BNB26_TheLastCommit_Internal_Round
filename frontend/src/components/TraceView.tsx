@@ -1,0 +1,1 @@
+export function TraceView({ believed, real }: { believed: string; real: string }) { return <div className="grid grid-cols-2 gap-4"><section><h2>What you thought</h2><pre>{believed}</pre></section><section><h2>What Python does</h2><pre>{real}</pre></section></div>; }

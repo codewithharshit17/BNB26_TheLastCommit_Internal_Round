@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["item_id","kind","family","prompt","code","problem_ref"],"properties":{"item_id":{"type":"string"},"kind":{"enum":["diagnostic","probe","transfer","discriminator","retest"]},"family":{"type":"string"},"prompt":{"type":"string"},"code":{"type":"string"},"problem_ref":{"type":["string","null"]}}}
