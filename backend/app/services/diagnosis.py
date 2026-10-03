@@ -1,3 +1,15 @@
+"""Diagnosis service — wires the engine, item bank, and ML posterior together.
+
+ITEMS is loaded from the pre-generated items_bank.json at startup.
+Falls back to generate() on the fly if the JSON file is missing so the
+server stays bootable even in a fresh checkout.
+
+Session posterior is kept in memory (SESSIONS dict).  The backend persists
+it to SQLite via learner_store so it survives restarts.
+"""
+
+from __future__ import annotations
+
 import json
 import uuid
 from pathlib import Path
@@ -5,6 +17,7 @@ from pathlib import Path
 from fastapi import HTTPException
 
 from engine.signature import believed_source, signature
+from engine.items.generator import load as load_items
 from ml.posterior import info_gain, update
 
 from . import learner_store
