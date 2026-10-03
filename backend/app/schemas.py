@@ -28,6 +28,9 @@ class AnswerResponse(BaseModel):
     believed_output: str
     believed_source: str
     next: NextAction
+    next_action: Literal["probe", "intervene", "reassess", "done"] | None = None
+    next_item: Item | None = None
+    next_misconception: str | None = None
 
 class LearnerResponse(BaseModel):
     misconceptions: list[dict[str, Any]]

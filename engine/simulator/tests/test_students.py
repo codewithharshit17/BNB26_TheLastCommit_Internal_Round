@@ -1,3 +1,25 @@
+import random
+
+from engine.simulator.students import simulate, simulate_attempt
+
+
+def test_student_simulation_is_reproducible():
+    item = {"signature": {"real": "20", "index_1_based": "10"}, "misconception": "index_1_based"}
+    assert simulate_attempt("clean", item, random.Random(7)) == simulate_attempt("clean", item, random.Random(7))
+
+
+def test_clean_student_uses_misconception_prediction():
+    item = {"signature": {"real": "20", "index_1_based": "10"}, "misconception": "index_1_based"}
+    answers = [simulate_attempt("clean", item, random.Random(seed))["answer"] for seed in range(20)]
+    assert answers.count("10") >= 15
+
+
+def test_patcher_and_true_learner_differ_on_transfer():
+    item = {"signature": {"real": "20", "index_1_based": "10"}, "misconception": "index_1_based", "intervened": True, "is_transfer": True}
+    patcher = [simulate_attempt("patcher", item, random.Random(seed))["answer"] for seed in range(20)]
+    learner = [simulate_attempt("true_learner", item, random.Random(seed))["answer"] for seed in range(20)]
+    assert patcher.count("10") >= 15
+    assert learner.count("20") >= 19
 """Tests for engine/simulator/students.py"""
 import pytest
 

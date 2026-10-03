@@ -58,8 +58,7 @@ def info_gain(posterior, signature, confidence=3):
     if not prior or not signature:
         return 0.0
 
-    possible_answers = set(signature.values())
-    possible_answers.add("__other__")
+    possible_answers = sorted(set(signature.values()) | {"__other__"})
     current_entropy = entropy(prior)
     expected_entropy = 0.0
     outcome_weights = {}

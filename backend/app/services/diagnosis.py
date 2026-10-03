@@ -16,14 +16,14 @@ from pathlib import Path
 
 from fastapi import HTTPException
 
-from engine.signature import believed_source, signature
+from engine.signature import signature
 from engine.items.generator import load as load_items
-from ml.posterior import info_gain, update
+from ml.integration import LIVE_HYPOTHESES, diagnose_answer
 
 from . import learner_store
 from .resolution import next_state
 
-HYPS = ["correct", "index_1_based", "range_1_to_n", "noop_method", "assign_copies", "add_before_div", "unknown"]
+HYPS = ["correct", *LIVE_HYPOTHESES, "unknown"]
 ITEMS = {
     "i1": {"item_id": "i1", "kind": "diagnostic", "family": "indexing", "prompt": "What does this print?", "code": "a = [10, 20, 30]\nprint(a[1])", "problem_ref": None},
     "i2": {"item_id": "i2", "kind": "probe", "family": "indexing", "prompt": "What does this print?", "code": "a = [10, 20, 30]\nprint(a[2])", "problem_ref": None},
@@ -55,6 +55,15 @@ def start_session():
     return {"session_id": session_id, "item": ITEMS["i1"]}
 
 
+def _probe_candidates(item_id):
+    """Return probe items with engine signatures for the ML selector."""
+    return [
+        {**candidate, "signature": signature(candidate["code"])}
+        for candidate in ITEMS.values()
+        if candidate["kind"] == "probe" and candidate["item_id"] != item_id
+    ]
+
+
 def answer(payload):
     session = learner_store.get_session(payload.session_id)
     item = ITEMS.get(payload.item_id)
@@ -66,10 +75,19 @@ def answer(payload):
         pending = [record for record in pending if record and record["state"] in {"intervened", "suspected_resolved"}]
         if pending and max(int(record["evidence"].get("other_topic_attempts", 0)) for record in pending) < 2:
             raise HTTPException(status_code=409, detail="delayed retest requires two intervening items on other topics")
-    prior = session["posterior"]
     sig = signature(item["code"])
-    posterior = update(prior, sig, payload.answer.strip(), payload.confidence)
-    top = max(posterior, key=posterior.get)
+    diagnosis = diagnose_answer(
+        {
+            "answer": payload.answer.strip(),
+            "confidence": payload.confidence,
+            "code": item["code"],
+            "signature": sig,
+        },
+        prior=session["posterior"],
+        next_items=_probe_candidates(payload.item_id),
+    )
+    posterior = diagnosis["posterior"]
+    top = diagnosis["top"]
 
     for hypothesis, probability in posterior.items():
         if hypothesis in {"correct", "unknown"}:
@@ -118,25 +136,21 @@ def answer(payload):
         action = "reassess"
         if next_item is None:
             action = "done"
-    elif top not in {"correct", "unknown"} and posterior[top] >= 0.6:
-        misconception = top
-        if posterior[top] >= 0.8:
-            action, next_item = "intervene", None
-        else:
-            probes = [candidate for candidate in ITEMS.values() if candidate["kind"] == "probe" and candidate["item_id"] != payload.item_id]
-            next_item = max(probes, key=lambda candidate: info_gain(posterior, signature(candidate["code"])), default=None)
-            action = "probe" if next_item else "intervene"
     else:
-        action, next_item, misconception = "done", None, None
+        action = diagnosis["next_action"]
+        next_item = diagnosis["next_item"]
+        misconception = diagnosis["next_misconception"]
 
-    believed = sig.get(top, sig["real"])
     return {
         "posterior": posterior,
         "top": top,
-        "bank_ids": BANK_MAP.get(top, []),
-        "real_output": sig["real"],
-        "believed_output": believed,
-        "believed_source": believed_source(item["code"], top) if top not in {"correct", "unknown"} else item["code"],
+        "bank_ids": diagnosis["bank_ids"],
+        "real_output": diagnosis["real_output"],
+        "believed_output": diagnosis["believed_output"],
+        "believed_source": diagnosis["believed_source"],
+        "next_action": action,
+        "next_item": next_item,
+        "next_misconception": misconception,
         "next": {"action": action, "item": next_item, "misconception": misconception},
     }
 
@@ -145,11 +159,11 @@ def intervention(misconception_id: str, item_id: str):
     item = ITEMS.get(item_id)
     if not item:
         raise HTTPException(status_code=404, detail="unknown item")
-    if misconception_id not in BANK_MAP:
+    if misconception_id not in LIVE_HYPOTHESES:
         raise HTTPException(status_code=404, detail="unknown misconception")
     contrast_code, takeaway = CONTRASTS.get(misconception_id, CONTRASTS["index_1_based"])
     contrast = signature(contrast_code)
-    bank_ids = BANK_MAP[misconception_id]
+    bank_ids = [bank_id for bank_id in BANK_MAP[misconception_id] if str(bank_id) in BANK_DESCRIPTIONS]
     title = f"Understanding {misconception_id.replace('_', ' ')}"
     if misconception_id == "index_1_based":
         title = "Python indexes start at zero"
