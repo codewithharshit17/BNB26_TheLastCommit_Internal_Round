@@ -22,14 +22,25 @@ def test_bayesian_evaluation_returns_metrics():
 
 
 def test_classifier_evaluation_returns_metrics():
-    attempts = [live_attempt("index_1_based"), live_attempt("range_1_to_n", "30"), live_attempt("add_before_div", "10")]
+    attempts = []
+    for label, answer in (("index_1_based", "10"), ("range_1_to_n", "30"), ("add_before_div", "10")):
+        for index in range(2):
+            item = live_attempt(label, answer)
+            item["item_id"] = f"{label}-{index}"
+            attempts.append(item)
     result = evaluation.evaluate_classifier(attempts)
-    assert {"logistic_regression", "gradient_boosting", "split"} <= result.keys()
-    assert all(0 <= result[name]["accuracy"] <= 1 for name in ("logistic_regression", "gradient_boosting"))
+    assert {"supported_label", "held_out_generalization"} == result.keys()
+    assert all(0 <= result["supported_label"][name]["accuracy"] <= 1 for name in ("logistic_regression", "gradient_boosting"))
+    assert "test_ids" in result["held_out_generalization"]["split"]
 
 
 def test_classifier_ablations_are_explicit():
-    attempts = [live_attempt("index_1_based"), live_attempt("range_1_to_n", "30"), live_attempt("add_before_div", "10")]
+    attempts = []
+    for label, answer in (("index_1_based", "10"), ("range_1_to_n", "30"), ("add_before_div", "10")):
+        for index in range(2):
+            item = live_attempt(label, answer)
+            item["item_id"] = f"{label}-{index}"
+            attempts.append(item)
     result = evaluation.evaluate_ablations(attempts)
     assert set(result) == {"full", "without_interpreter_match", "without_confidence"}
 
@@ -41,6 +52,7 @@ def test_probe_paths_return_zero_one_two_metrics():
         information_gain_result = evaluation.bayesian_predictions(attempts, count, "information_gain", items=items)
         random_result = evaluation.bayesian_predictions(attempts, count, "random", items=items)
         assert information_gain_result["count"] == random_result["count"] == 2
+        assert evaluation.probe_candidate_pool(items) == evaluation.probe_candidate_pool(items)
 
 
 def test_false_resolution_returns_both_rates():
@@ -67,3 +79,20 @@ def test_run_writes_required_metrics_json(tmp_path):
     assert saved["seed"] == 3
     assert saved["dataset_size"] == result["dataset_size"]
     assert {"bayesian", "classifier", "llm_zero_shot", "probes", "held_out"} <= saved.keys()
+
+
+def test_dataset_is_larger_and_reproducible(tmp_path):
+    first = evaluation.run(seed=42, output_path=tmp_path / "first.json")
+    second = evaluation.run(seed=42, output_path=tmp_path / "second.json")
+    assert first["dataset_size"] >= 300
+    assert first == second
+
+
+def test_confusable_subset_uses_actual_signature_collisions():
+    attempts = [
+        {"family": "indexing", "answer": "20", "signature": {"real": "20", "index_1_based": "20", "range_1_to_n": "20"}, "misconception": "correct"},
+        {"family": "indexing", "answer": "10", "signature": {"real": "20", "index_1_based": "10", "range_1_to_n": "30"}, "misconception": "index_1_based"},
+    ]
+    selected = evaluation.confusable_subset(attempts)
+    assert len(selected) == 1
+    assert selected[0]["answer"] == "20"

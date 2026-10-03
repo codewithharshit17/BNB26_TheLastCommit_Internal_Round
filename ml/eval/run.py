@@ -39,7 +39,7 @@ def _live_attempt(attempt):
     return result
 
 
-def generate_dataset(seed=SEED, repetitions=8, items=None):
+def generate_dataset(seed=SEED, repetitions=25, items=None):
     """Generate a small deterministic dataset from real engine signatures."""
     rng = random.Random(seed)
     items = _items() if items is None else items
@@ -54,6 +54,14 @@ def generate_dataset(seed=SEED, repetitions=8, items=None):
                 attempts.append(_live_attempt(simulate("noisy", target_item, rng)))
             mixed = {**item, "misconceptions": [target, "index_1_based" if target != "index_1_based" else "range_1_to_n"]}
             attempts.append(_live_attempt(simulate("mixed", mixed, rng)))
+        learner_item = {**item, "misconception": target, "intervened": True}
+        learner_attempt = simulate("true_learner", learner_item, rng)
+        learner_attempt["misconception"] = "correct"
+        attempts.append(_live_attempt(learner_attempt))
+        patcher_item = {**item, "misconception": target, "intervened": True}
+        transfer_item = {**item, "misconception": target, "intervened": True, "is_transfer": True}
+        attempts.append(_live_attempt(simulate("patcher", patcher_item, rng)))
+        attempts.append(_live_attempt(simulate("patcher", transfer_item, rng)))
     heldout = HELD_OUT[0] if HELD_OUT else "index_from_m1"
     for item in items[:2]:
         target_item = {**item, "misconception": heldout}
@@ -99,20 +107,52 @@ def evaluate_classifier(attempts):
     supported = [attempt for attempt in attempts if attempt.get("misconception") in LIVE_HYPOTHESES]
     train, test, train_ids, test_ids = grouped_split(supported, test_size=0.25, random_state=SEED)
     families = sorted({attempt.get("family") for attempt in supported})
-    names = get_feature_names(LIVE_HYPOTHESES, families)
-    X, y = build_dataset(train, LIVE_HYPOTHESES, families)
+    supported_train, supported_test, supported_metadata = _supported_label_split(supported)
+    return {
+        "supported_label": _fit_classifier_split(supported_train, supported_test, LIVE_HYPOTHESES, families, supported_metadata),
+        "held_out_generalization": _fit_classifier_split(
+            train, test, LIVE_HYPOTHESES, families,
+            {"train_ids": sorted(train_ids), "test_ids": sorted(test_ids), "train_count": len(train), "test_count": len(test)},
+        ),
+    }
+
+
+def _fit_classifier_split(train, test, hypotheses, families, split_metadata=None):
+    names = get_feature_names(hypotheses, families)
+    X, y = build_dataset(train, hypotheses, families)
     models = train_models(X, y, names)
     result = {}
     for name, bundle in models.items():
         predictions = [classifier_predict(attempt, bundle)["predicted_misconception"] for attempt in test]
         result[name] = report(predictions, [attempt["misconception"] for attempt in test])
-    result["split"] = {"train_ids": sorted(train_ids), "test_ids": sorted(test_ids), "train_count": len(train), "test_count": len(test)}
+    result["split"] = split_metadata or {"train_count": len(train), "test_count": len(test)}
     return result
+
+
+def _supported_label_split(attempts):
+    """Hold out one item group per supported label while retaining labels."""
+    grouped = {}
+    for attempt in attempts:
+        grouped.setdefault(attempt.get("misconception"), {}).setdefault(attempt.get("item_id"), []).append(attempt)
+    train, test = [], []
+    train_items, test_items = set(), set()
+    for label in sorted(grouped):
+        item_ids = sorted(grouped[label])
+        if len(item_ids) < 2:
+            for rows in grouped[label].values():
+                train.extend(rows)
+            train_items.update(item_ids)
+            continue
+        held_item = item_ids[-1]
+        for item_id, rows in grouped[label].items():
+            (test if item_id == held_item else train).extend(rows)
+            (test_items if item_id == held_item else train_items).add(item_id)
+    return train, test, {"train_item_ids": sorted(train_items), "test_item_ids": sorted(test_items), "train_count": len(train), "test_count": len(test)}
 
 
 def evaluate_ablations(attempts):
     supported = [attempt for attempt in attempts if attempt.get("misconception") in LIVE_HYPOTHESES]
-    train, test, _, _ = grouped_split(supported, test_size=0.25, random_state=SEED)
+    train, test, _ = _supported_label_split(supported)
     families = sorted({attempt.get("family") for attempt in supported})
     full_names = get_feature_names(LIVE_HYPOTHESES, families)
     variants = {
@@ -156,7 +196,22 @@ def evaluate_llm(attempts, seed=SEED, limit=200):
 
 def confusable_subset(attempts):
     families = {"indexing", "range", "precedence"}
-    return [attempt for attempt in attempts if attempt.get("family") in families]
+    result = []
+    for attempt in attempts:
+        if attempt.get("family") not in families:
+            continue
+        signature = _live_attempt(attempt)["signature"]
+        matches = [hypothesis for hypothesis in LIVE_HYPOTHESES if signature.get(hypothesis) == attempt.get("answer")]
+        if attempt.get("answer") == signature.get("real"):
+            matches.append("correct")
+        if len(set(matches)) >= 2:
+            result.append(attempt)
+    return result
+
+
+def probe_candidate_pool(items, item_id=None):
+    """Return the common live candidate pool used by both probe strategies."""
+    return sorted(item["item_id"] for item in items if item["item_id"] != item_id)
 
 
 def false_resolution_experiment(seed=SEED, discriminator_passes=2, surface_forms=2):
@@ -190,6 +245,7 @@ def run(seed=SEED, output_path=None):
     items = _items()
     attempts = generate_dataset(seed, items=items)
     confusable = confusable_subset(attempts)
+    confusable_eval = [a for a in confusable if a.get("misconception") in LIVE_HYPOTHESES or a.get("misconception") == "correct"]
     metrics = {
         "seed": seed,
         "dataset_size": len(attempts),
@@ -200,7 +256,8 @@ def run(seed=SEED, output_path=None):
         "classifier": evaluate_classifier(attempts),
         "ablations": evaluate_ablations(attempts),
         "llm_zero_shot": evaluate_llm([a for a in attempts if a.get("misconception") in LIVE_HYPOTHESES], seed),
-        "confusable": {"families": sorted({a.get("family") for a in confusable}), "count": len(confusable), "bayesian": bayesian_predictions([a for a in confusable if a.get("misconception") in LIVE_HYPOTHESES], items=items)},
+        "confusable": {"families": sorted({a.get("family") for a in confusable}), "count": len(confusable), "bayesian": bayesian_predictions(confusable_eval, items=items), "probes": {str(n): {"information_gain": bayesian_predictions(confusable_eval, n, "information_gain", seed, items), "random": bayesian_predictions(confusable_eval, n, "random", seed, items)} for n in range(3)}},
+        "probe_candidate_pool": probe_candidate_pool(items),
         "probes": {str(n): {"information_gain": bayesian_predictions([a for a in attempts if a.get("misconception") in LIVE_HYPOTHESES], n, "information_gain", seed, items), "random": bayesian_predictions([a for a in attempts if a.get("misconception") in LIVE_HYPOTHESES], n, "random", seed, items)} for n in range(3)},
         "false_resolution": false_resolution_experiment(seed),
         "held_out": heldout_evaluation(attempts),
