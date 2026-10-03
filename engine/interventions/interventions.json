@@ -1,0 +1,67 @@
+{
+  "noop_method": {
+    "title": "String methods don't change the original — they return a new value",
+    "bank_description": "Student believes that calling a string method (such as .upper(), .lower(), .strip(), .replace(), or .split()) modifies the original string variable in place, like list.append() does.",
+    "contrast_code": "name = \"hello\"\nname.upper()\nprint(name)          # student expects \"HELLO\"\n\n# Fix: capture the return value\nname = name.upper()\nprint(name)          # now prints \"HELLO\"",
+    "real_output": "hello",
+    "believed_output": "HELLO",
+    "steps": [
+      "Strings in Python are immutable — they can never be changed in place.",
+      "Methods like .upper() create and RETURN a brand-new string; the original variable is untouched unless you assign the result back.",
+      "Write  name = name.upper()  (capture the return value) instead of just  name.upper()  (which discards it)."
+    ],
+    "takeaway": "Every string method returns a new string — always assign the result if you want to keep it."
+  },
+  "range_1_to_n": {
+    "title": "range(n) starts at 0, not 1 — and stops before n",
+    "bank_description": "Student believes that range(n) produces the sequence 1, 2, ..., n (like a 1-based count), when it actually produces 0, 1, ..., n-1.",
+    "contrast_code": "for i in range(5):\n    print(i)   # prints 0 1 2 3 4  NOT 1 2 3 4 5\n\n# To get 1..5 write:\nfor i in range(1, 6):\n    print(i)   # prints 1 2 3 4 5",
+    "real_output": "0\n1\n2\n3\n4",
+    "believed_output": "1\n2\n3\n4\n5",
+    "steps": [
+      "range(n) always starts at 0 — the first value is 0, not 1.",
+      "range(n) stops BEFORE n — it never includes n itself.",
+      "To get 1 through n use range(1, n+1).  To get k through m-1 use range(k, m)."
+    ],
+    "takeaway": "range(n) gives you exactly n numbers: 0, 1, 2, ..., n-1."
+  },
+  "index_1_based": {
+    "title": "Python lists and strings start at index 0, not 1",
+    "bank_description": "Student believes the first element of a list or string is at index 1, so a[1] is the first element, a[2] is the second, and so on.",
+    "contrast_code": "a = [10, 20, 30]\nprint(a[0])   # 10  — the FIRST element\nprint(a[1])   # 20  — the SECOND element\nprint(a[2])   # 30  — the THIRD element",
+    "real_output": "20",
+    "believed_output": "10",
+    "steps": [
+      "Python uses 0-based indexing: the very first element is always at index 0.",
+      "a[1] is the SECOND element, a[2] is the THIRD, and so on.",
+      "To access the first element write a[0]; the last element of a length-n list is at a[n-1] (or a[-1])."
+    ],
+    "takeaway": "Index 0 = first element. Index 1 = second. Always subtract 1 from your intuition."
+  },
+  "assign_copies": {
+    "title": "Assigning a list variable creates an alias, not a copy",
+    "bank_description": "Student believes that writing b = a creates an independent copy of the list stored in a, so later changes to a do not affect b.",
+    "contrast_code": "a = [1, 2, 3]\nb = a          # b is an ALIAS — same list in memory\na.append(4)\nprint(b)       # [1, 2, 3, 4]  — b sees the change too\n\n# To make an independent copy:\nb = a.copy()   # or b = list(a) or b = a[:]\na.append(5)\nprint(b)       # [1, 2, 3, 4]  — unchanged",
+    "real_output": "[1, 2, 3, 4]",
+    "believed_output": "[1, 2, 3]",
+    "steps": [
+      "In Python, lists are objects stored in memory.  b = a copies the REFERENCE (address), not the data — both names now point to the same list.",
+      "Any mutation through either name (a.append, b.pop, etc.) affects the single shared list.",
+      "To get an independent copy use a.copy(), list(a), or a[:]."
+    ],
+    "takeaway": "b = a makes two names for one list. Use b = a.copy() to get two separate lists."
+  },
+  "add_before_div": {
+    "title": "Python follows standard operator precedence: * and / before + and -",
+    "bank_description": "Student believes that addition (+) is evaluated before division (/), so  a + b / c  is computed as  (a + b) / c  instead of  a + (b / c).",
+    "contrast_code": "print(10 + 20 / 2)    # 20.0  NOT 15.0\n#  Python evaluates: 10 + (20 / 2) = 10 + 10.0 = 20.0\n#  Student expects:  (10 + 20) / 2 = 30 / 2   = 15.0\n\n# Use parentheses to force the order you want:\nprint((10 + 20) / 2)  # 15.0",
+    "real_output": "20.0",
+    "believed_output": "15.0",
+    "steps": [
+      "Python (like maths) evaluates * and / BEFORE + and -, so  a + b / c  means  a + (b / c).",
+      "If you want addition first, use explicit parentheses: (a + b) / c.",
+      "When in doubt, add parentheses — they make the intent clear and prevent bugs."
+    ],
+    "takeaway": "Division binds tighter than addition. Write (a+b)/c if you mean that."
+  }
+}

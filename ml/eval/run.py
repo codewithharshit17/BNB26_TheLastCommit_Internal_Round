@@ -6,7 +6,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from engine.rewrites import LIVE_REGISTRY, REGISTRY
-from engine.simulator.students import simulate
+from engine.simulator.students import simulate_attempt
 from ml.baselines.llm_zero_shot import LLMConfigurationError, predict as llm_predict
 from ml.classifier import build_dataset, get_feature_names, grouped_split, predict as classifier_predict, train_models
 from ml.posterior import update
@@ -50,23 +50,23 @@ def generate_dataset(seed=SEED, repetitions=25, items=None):
                 continue
             target_item = {**item, "misconception": target}
             for _ in range(repetitions):
-                attempts.append(_live_attempt(simulate("clean", target_item, rng)))
-                attempts.append(_live_attempt(simulate("noisy", target_item, rng)))
+                attempts.append(_live_attempt(simulate_attempt("clean", target_item, rng)))
+                attempts.append(_live_attempt(simulate_attempt("noisy", target_item, rng)))
             mixed = {**item, "misconceptions": [target, "index_1_based" if target != "index_1_based" else "range_1_to_n"]}
-            attempts.append(_live_attempt(simulate("mixed", mixed, rng)))
+            attempts.append(_live_attempt(simulate_attempt("mixed", mixed, rng)))
         learner_item = {**item, "misconception": target, "intervened": True}
-        learner_attempt = simulate("true_learner", learner_item, rng)
+        learner_attempt = simulate_attempt("true_learner", learner_item, rng)
         learner_attempt["misconception"] = "correct"
         attempts.append(_live_attempt(learner_attempt))
         patcher_item = {**item, "misconception": target, "intervened": True}
         transfer_item = {**item, "misconception": target, "intervened": True, "is_transfer": True}
-        attempts.append(_live_attempt(simulate("patcher", patcher_item, rng)))
-        attempts.append(_live_attempt(simulate("patcher", transfer_item, rng)))
+        attempts.append(_live_attempt(simulate_attempt("patcher", patcher_item, rng)))
+        attempts.append(_live_attempt(simulate_attempt("patcher", transfer_item, rng)))
     heldout = HELD_OUT[0] if HELD_OUT else "index_from_m1"
     for item in items[:2]:
         target_item = {**item, "misconception": heldout}
         for _ in range(max(2, repetitions // 2)):
-            attempts.append(simulate("unknown", target_item, rng))
+            attempts.append(simulate_attempt("unknown", target_item, rng))
     return attempts
 
 
@@ -96,7 +96,7 @@ def bayesian_predictions(attempts, probes=0, probe_mode=None, seed=SEED, items=N
             if probe is None:
                 break
             used.add(probe["item_id"])
-            probe_attempt = simulate(attempt.get("student_type", "clean"), {**probe, "misconception": attempt.get("misconception")}, rng)
+            probe_attempt = simulate_attempt(attempt.get("student_type", "clean"), {**probe, "misconception": attempt.get("misconception")}, rng)
             posterior = update(posterior, probe["signature"], probe_attempt["answer"], probe_attempt["confidence"])
         predictions.append(max(posterior, key=posterior.get))
         labels.append(attempt.get("misconception"))
@@ -218,9 +218,9 @@ def false_resolution_experiment(seed=SEED, discriminator_passes=2, surface_forms
     item = _items()[0]
     patcher = {**item, "misconception": "index_1_based", "intervened": True}
     rng = random.Random(seed)
-    exact = simulate("patcher", patcher, rng)["answer"] == item["signature"]["real"]
+    exact = simulate_attempt("patcher", patcher, rng)["answer"] == item["signature"]["real"]
     transfer = {**item, "misconception": "index_1_based", "intervened": True, "is_transfer": True}
-    transfer_wrong = simulate("patcher", transfer, rng)["answer"] != item["signature"]["real"]
+    transfer_wrong = simulate_attempt("patcher", transfer, rng)["answer"] != item["signature"]["real"]
     naive_false = int(exact and transfer_wrong)
     relearn_false = int(exact and discriminator_passes >= 2 and surface_forms >= 2 and not transfer_wrong)
     return {"naive_false_resolution_rate": float(naive_false), "relearn_false_resolution_rate": float(relearn_false), "thresholds": {"discriminator_passes": discriminator_passes, "surface_forms": surface_forms, "delayed_retest": True}}

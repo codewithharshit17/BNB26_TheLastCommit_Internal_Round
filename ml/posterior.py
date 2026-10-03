@@ -83,7 +83,7 @@ def update(prior, sig, answer, conf):
 def entropy(distribution):
     return -sum(probability * math.log2(probability) for probability in distribution.values() if probability > 0)
 def info_gain(post, sig, conf=3):
-    answers = set(sig.values()) | {"__other__"}
+    answers = sorted(set(sig.values()) | {"__other__"})
     expected_entropy = 0
     for answer in answers:
         probability = sum(post[h] * lik(answer, sig.get(h, "__x__"), conf, "correct" if h == "correct" else "misconception" if h != "unknown" else "u") for h in post)

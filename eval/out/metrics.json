@@ -380,13 +380,13 @@
       },
       "1": {
         "information_gain": {
-          "accuracy": 0.13333333333333333,
+          "accuracy": 0.1,
           "count": 60,
           "per_class": {
             "add_before_div": {
               "actual": 25,
-              "correct": 2,
-              "recall": 0.08
+              "correct": 0,
+              "recall": 0.0
             },
             "correct": {
               "actual": 6,
@@ -444,13 +444,13 @@
       },
       "2": {
         "information_gain": {
-          "accuracy": 0.2,
+          "accuracy": 0.21666666666666667,
           "count": 60,
           "per_class": {
             "add_before_div": {
               "actual": 25,
-              "correct": 6,
-              "recall": 0.24
+              "correct": 7,
+              "recall": 0.28
             },
             "correct": {
               "actual": 6,
@@ -635,8 +635,8 @@
         "per_class": {
           "add_before_div": {
             "actual": 114,
-            "correct": 81,
-            "recall": 0.7105263157894737
+            "correct": 79,
+            "recall": 0.6929824561403509
           },
           "correct": {
             "actual": 0,
@@ -645,8 +645,8 @@
           },
           "index_1_based": {
             "actual": 102,
-            "correct": 78,
-            "recall": 0.7647058823529411
+            "correct": 79,
+            "recall": 0.7745098039215687
           },
           "noop_method": {
             "actual": 0,
@@ -655,8 +655,8 @@
           },
           "range_1_to_n": {
             "actual": 102,
-            "correct": 74,
-            "recall": 0.7254901960784313
+            "correct": 75,
+            "recall": 0.7352941176470589
           }
         }
       },
@@ -694,13 +694,13 @@
     },
     "2": {
       "information_gain": {
-        "accuracy": 0.7358490566037735,
+        "accuracy": 0.7452830188679245,
         "count": 318,
         "per_class": {
           "add_before_div": {
             "actual": 114,
-            "correct": 81,
-            "recall": 0.7105263157894737
+            "correct": 85,
+            "recall": 0.7456140350877193
           },
           "correct": {
             "actual": 0,
@@ -709,8 +709,8 @@
           },
           "index_1_based": {
             "actual": 102,
-            "correct": 74,
-            "recall": 0.7254901960784313
+            "correct": 73,
+            "recall": 0.7156862745098039
           },
           "noop_method": {
             "actual": 0,

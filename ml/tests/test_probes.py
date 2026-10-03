@@ -19,6 +19,11 @@ def test_discriminating_probe_has_more_information_gain():
     assert different > identical
 
 
+def test_information_gain_is_deterministic_for_same_signature():
+    signature = {"h1": "one", "h2": "two", "real": "real"}
+    assert info_gain(POSTERIOR, signature) == info_gain(POSTERIOR, signature)
+
+
 def test_ambiguous_posterior_gets_useful_information_gain():
     assert info_gain({"h1": 0.5, "h2": 0.5}, {"h1": "one", "h2": "two"}) > 0
 
